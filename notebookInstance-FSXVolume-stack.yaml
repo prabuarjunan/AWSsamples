@@ -120,19 +120,13 @@ Resources:
             sudo yum install -y nfs-utils
             # Now we can create the mount point and mount the file system
             sudo mkdir /fsx
-            sudo mount -t nfs FSXo_DNS_NAME:/vol1 /fsx
+            sudo mount -t nfs $FSXo_DNS_NAME:/vol1 /fsx
             # Let's make sure we have the appropriate access to the directory
             sudo chmod go+rw /fsx
             #  The toolkit requires an ONTAP account with API access. The toolkit will use this account to access the ONTAP API. NetApp recommends using an SVM-level account.
             #  Copy the JSON file created using the following steps from getting started step in the link https://github.com/NetApp/netapp-dataops-toolkit/tree/main/netapp_dataops_traditional
             #  required for the API access
             #  Change the hostname, SVM, dataLif, password accordingly. Example: "hostname": "198.19.0.0", "svm": "test-svm", "dataLif": "198.19.0.0", "password": "TmV0QXBwMTIz"
-            json: '''{ "ONTAP", "hostname": "198.19.255.64", "svm": "prabu-sim", "dataLif": "198.19.255.64", "defaultVolumeType": "flexgroup",
-            "defaultExportPolicy": "default","defaultSnapshotPolicy": "none", "defaultUnixUID":
-            "0", "defaultUnixGID": "0", "defaultUnixPermissions": "0777", "defaultAggregate":
-            "aggr1", "username": "vsadmin","password": "TmV0QXBwMTIz", "verifySSLCert":
-            false}'' | jq ''.'''
+            json='{ "ONTAP", "hostname": "Enter Your Hostname here", "svm": "Enter your SNM Name", "dataLif": "Enter your data lif IP address", "defaultVolumeType": "flexgroup", "defaultExportPolicy": "default","defaultSnapshotPolicy": "none", "defaultUnixUID": "0", "defaultUnixGID": "0", "defaultUnixPermissions": "0777", "defaultAggregate": "Enter your aggregate name", "username": "vsadmin","password": "Enter your Password here", "verifySSLCert": false}'
             mkdir ./.netapp_dataops/
             echo $json >> ./.netapp_dataops/config.json
-
-
