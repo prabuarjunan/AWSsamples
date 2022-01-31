@@ -1,0 +1,13 @@
+#edit and copy the file
+vim .aws-cft-stack-status.sh.sh
+#bash
+bash
+#change the permission
+chmod 777 ./aws-cft-stack-status.sh
+#command to check the live stack creation messages
+./aws-cft-stack-status.sh.sh --watch --region us-east-1 --stack-name $stack
+
+
+# The below command does not work
+#aws cloudformation create-stack --stack-name myStackName --template-url https://s3.amazonaws.com/amazon-fsx/workshop/ontap/templates/fsx-ontap-od-workshop.yaml
+--parameters FsxAdminPassword=NetApp1!, KeyPair=prabu-east-latest.pem, AvailabilityZones=us-east-1a
