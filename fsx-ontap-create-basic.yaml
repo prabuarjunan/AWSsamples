@@ -1,0 +1,35 @@
+---
+Description: "Miniumum config of a ONTAP MAZ file system"
+Resources:
+  TestOntapFs:
+    Type: "AWS::FSx::FileSystem"
+    Properties:
+      FileSystemType: "ONTAP"
+      StorageCapacity: 1024
+      SubnetIds: ["subnet-70df7e16", "subnet-873c9ed8"]
+      OntapConfiguration:
+        DeploymentType: "MULTI_AZ_1"
+        PreferredSubnetId: "subnet-70df7e16"
+        ThroughputCapacity: 128
+  TestOntapSvm:
+    Type: "AWS::FSx::StorageVirtualMachine"
+    Properties:
+      FileSystemId: !Ref TestOntapFs
+      Name: svm1
+  TestOntapVolume:
+    Type: "AWS::FSx::Volume"
+    Properties:
+      Name: vol1
+      OntapConfiguration:
+        JunctionPath: /vol1
+        SizeInMegabytes: 100
+        StorageEfficiencyEnabled: true
+        StorageVirtualMachineId: !Ref TestOntapSvm
+      VolumeType: "ONTAP"
+Outputs:
+  FileSystemId:
+    Value: !Ref 'TestOntapFs'
+  SvmId:
+    Value: !Ref 'TestOntapSvm'
+  VolumeId:
+    Value: !Ref 'TestOntapVolume'
