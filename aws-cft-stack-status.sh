@@ -1,10 +1,5 @@
 #!/bin/bash
 #
-# aws-cloudformation-stack-status --region $region --watch --stack-name $stack
-#
-
-
-#
 region_opt=
 color_opt=
 profile_opt=
